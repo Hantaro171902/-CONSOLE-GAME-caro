@@ -19,55 +19,19 @@
 #define ColorCode_Yellow		14
 #define ColorCode_White			15
 
-#define default_ColorCode		7
-#define default_Background		0
-#define White_Background		240
+#define default_ColorCode		ColorCode_DarkWhite
+#define default_Background		ColorCode_Back
+// #define White_Background		240
 
 class _Common{
 
 public:
 	static void fixConsoleWindow();
-	static void gotoXY(int, int);
-	static void TextColor(int);
-	static void Nocursortype();
-	static void UnNocursortype();
+	static void gotoXY(int x, int y);
+	static void textColor(int color);
+	static void setColor(int fg, int bg);
+	static void resetColor();
+	static void showCuror();
+	static void hideCursor();	
 };
-
-
-void _Common::gotoXY(int pX, int pY)
-{
-	COORD coord;
-	coord.X = pX;
-	coord.Y = pY;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-
-void _Common::fixConsoleWindow()
-{
-	HWND consoleWindow = GetConsoleWindow();
-	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
-	style = style & ~(WS_MAXIMIZEBOX)& ~(WS_THICKFRAME);
-	SetWindowLong(consoleWindow, GWL_STYLE, style);
-}
-
-void _Common::TextColor(int color)
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
-
-void _Common::Nocursortype()
-{
-	CONSOLE_CURSOR_INFO Info;
-	Info.bVisible = FALSE;
-	Info.dwSize = 20;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
-}
-
-void _Common::UnNocursortype()
-{
-	CONSOLE_CURSOR_INFO Info;
-	Info.bVisible = TRUE;
-	Info.dwSize = 20;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
-}
 
