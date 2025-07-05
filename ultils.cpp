@@ -53,17 +53,18 @@ void clearScreen() {
 }
 
 // Box drawing characters
-const char HORIZONTAL_LINE[] = "\u2500"; // ─
-const char VERTICAL_LINE[] = "\u2502";   // │
-const char TOP_LEFT_CORNER[] = "\u250C"; // ┌
-const char TOP_RIGHT_CORNER[] = "\u2510";// ┐
-const char BOTTOM_LEFT_CORNER[] = "\u2514"; // └
-const char BOTTOM_RIGHT_CORNER[] = "\u2518"; // ┘
-const char T_LEFT[] = "\u251C"; // ├
-const char T_RIGHT[] = "\u2524"; // ┤
-const char T_TOP[] = "\u252C"; // ┬
-const char T_BOTTOM[] = "\u2534"; // ┴
-const char CROSS[] = "\u253C"; // ┼
+const char SYMBOL_HORIZONTAL[]   = "\u2500"; // ─
+const char SYMBOL_VERTICAL[]     = "\u2502"; // │
+const char SYMBOL_TOP_LEFT[]     = "\u250C"; // ┌
+const char SYMBOL_TOP_RIGHT[]    = "\u2510"; // ┐
+const char SYMBOL_BOTTOM_LEFT[]  = "\u2514"; // └
+const char SYMBOL_BOTTOM_RIGHT[] = "\u2518"; // ┘
+const char SYMBOL_T_LEFT[]       = "\u251C"; // ├
+const char SYMBOL_T_RIGHT[]      = "\u2524"; // ┤
+const char SYMBOL_T_TOP[]        = "\u252C"; // ┬
+const char SYMBOL_T_BOTTOM[]     = "\u2534"; // ┴
+const char SYMBOL_INTERSECT[]    = "\u253C"; // ┼
+
 
 void setTextColor(int color) {
     // ANSI escape codes for text colors
