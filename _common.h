@@ -2,7 +2,6 @@
 #pragma once
 #include <Windows.h>
 
-
 #define ColorCode_Back			0
 #define ColorCode_DarkBlue		1
 #define ColorCode_DarkGreen		2
