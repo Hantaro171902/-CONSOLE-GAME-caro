@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "utils.h"
 
 using namespace std;
 
@@ -10,20 +11,6 @@ using namespace std;
 const int BOARD_SIZE = 20; 
 const int WINNING_COUNT = 5; // 5 in a row to win
 
-// Symbol for rendering the board
-extern const string ANSI_FOREGROUND_COLORS[];
-extern const string ANSI_BACKGROUND_COLORS[];
-extern const string BOX_TOP_LEFT;
-extern const string BOX_TOP_RIGHT;
-extern const string BOX_BOTTOM_LEFT;
-extern const string BOX_BOTTOM_RIGHT;
-extern const string BOX_HORIZONTAL;
-extern const string BOX_VERTICAL;
-extern const string BOX_T_UP;
-extern const string BOX_T_DOWN;
-extern const string BOX_T_LEFT;
-extern const string BOX_T_RIGHT;
-extern const string BOX_CROSS;
 
 enum class CellState {
     EMPTY = 0,
