@@ -5,16 +5,12 @@
 
 class Player {
 private:
-    CellState playerType; // Player type (X or O)
-    string playerName; // Player name (optional)
+    CellState playerType;
+    string playerName;
 
 public:
-    Player(CellState type, const string& name = "") : playerType(type), playerName(name) {}
-
+    Player(CellState type, const string& name = "");
     CellState getType() const;
+    void setName(const string& newName);
     string getName() const;
-
-    void setName(const string& newName) {}
-    void displayInfo() const; // Display player information
-
 };

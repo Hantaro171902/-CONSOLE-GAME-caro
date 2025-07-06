@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "utils.h"
+#include "ultils.h"
 
 using namespace std;
 
@@ -27,6 +27,7 @@ public:
     void draw() const;
     bool placeMove(int row, int col, CellState player);
     bool checkWin(int row, int col, CellState player) const;
+    bool checkDirection(int row, int col, int dRow, int dCol, CellState player) const;
     CellState getCell(int row, int col) const;
     void reset();
 

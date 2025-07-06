@@ -35,7 +35,7 @@ void Game::handleMove() {
     cout << "Enter row and column (0-based): ";
     cin >> row >> col;
 
-    if (board.placePiece(row, col, currentPlayer->getType())) {
+    if (board.placeMove(row, col, currentPlayer->getType())) {
         if (board.checkWin(row, col, currentPlayer->getType())) {
             render();
             displayWinner();

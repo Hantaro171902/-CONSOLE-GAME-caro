@@ -1,4 +1,5 @@
 #include "board.h"
+#include <iomanip>
 #include "ultils.h"
 #include <iostream>
 
@@ -10,38 +11,47 @@ Board::Board() {
     grid.resize(BOARD_SIZE, vector<CellState>(BOARD_SIZE, CellState::EMPTY));
 }
 
-void Board::draw() {
+void Board::draw() const {
     clearScreen();
+
+    // Column headers
+    cout << "    ";
+    for (int col = 0; col < BOARD_SIZE; col++) {
+        int colNumber = col + 1;
+        cout << setw(3) << colNumber;
+    }
+    cout << endl;
+
+    
     for (int y = 0; y <= 2 * BOARD_SIZE; y++) {
-        for (int x = 0; x <= 4 * BOARD_SIZE; x++) {
-            if (y % 2 == 0) { // Horizontal lines
-                if (x % 4 == 0) {
-                    cout << SYMBOL_INTERSECT;
-                } else {
-                    cout << SYMBOL_HORIZONTAL;
-                }
-            } else { // Vertical lines
-                if (x % 4 == 0) {
-                    cout << SYMBOL_VERTICAL;    
-                } else {
-                    int row = (y - 1) / 2;
-                    int col = (x - 1) / 4;
-                    if (row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE && x % 4 == 2) {
-                        int val = grid[row][col];
-                        if (val != CellState::EMPTY) {
-                            setTextColor(static_cast<int> (val)); // Player X or O
-                            cout << (val == CellState::PLAYER_X ? "X" : "O");
-                            setTextColor(7); // Reset color
-                        } else {
-                            cout << " ";
-                        }
+        if (y % 2 == 0) { 
+            // Row headers
+            cout << "   ";
+            for (int col = 0; col <= BOARD_SIZE; col++) {
+                cout << SYMBOL_INTERSECT << SYMBOL_HORIZONTAL << SYMBOL_HORIZONTAL << SYMBOL_HORIZONTAL;
+            }
+            cout << endl;
+        } else { 
+            // Row with cells
+            int rowNum = (y - 1) / 2 + 1;
+            cout << setw(2) << rowNum << " ";
+
+            for (int x = 0; x <= BOARD_SIZE; ++x) {
+                cout << SYMBOL_VERTICAL;
+
+                if (x < BOARD_SIZE) {
+                    CellState val = grid[rowNum - 1][x];
+                    if (val != CellState::EMPTY) {
+                        setTextColor(static_cast<int>(val));
+                        cout << " " << (val == CellState::PLAYER_X ? "X" : "O") << " ";
+                        setTextColor(7);
                     } else {
-                        cout << " ";
+                        cout << "   ";
                     }
                 }
             }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
@@ -53,7 +63,7 @@ bool Board::placeMove(int row, int col, CellState player) {
     return false;
 }
 
-bool Board::checkWin(int row, int col, CellState player) {
+bool Board::checkWin(int row, int col, CellState player) const{
     // Check horizontal, vertical, and both diagonals
     return checkDirection(row, col, 0, 1, player) || // Horizontal
            checkDirection(row, col, 1, 0, player) || // Vertical
@@ -61,7 +71,7 @@ bool Board::checkWin(int row, int col, CellState player) {
            checkDirection(row, col, 1, -1, player);   // Diagonal /
 }
 
-bool Board::checkDirection(int row, int col, int dRow, int dCol, CellState player) {
+bool Board::checkDirection(int row, int col, int dRow, int dCol, CellState player ) const {
     int count = 1;
     for (int i = 1; i < WINNING_COUNT; i++) {
         int r = row - i * dRow;
