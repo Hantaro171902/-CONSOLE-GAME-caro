@@ -14,21 +14,23 @@ void drawBoard() {
                 if (x % 4 == 0) {
                     cout << SYMBOL_INTERSECT;
                 } else {
-                    cout << " ";
+                    cout << SYMBOL_HORIZONTAL;
                 }
             } else { // Vertical lines
-                if (x % 2 == 0) {
-                    cout << BOX_VERTICAL;
+                if (x % 4 == 0) {
+                    cout << SYMBOL_VERTICAL;    
                 } else {
-                    int cellValue = board[y / 2][x / 2];
-                    if (cellValue == 1) {
-                        setTextColor(ANSI_FOREGROUND_COLORS[1]); // Player X
-                        cout << "X";
-                        setTextColor(ANSI_FOREGROUND_COLORS[0]); // Reset color
-                    } else if (cellValue == 2) {
-                        setTextColor(ANSI_FOREGROUND_COLORS[2]); // Player O
-                        cout << "O";
-                        setTextColor(ANSI_FOREGROUND_COLORS[0]); // Reset color
+                    int row = (y - 1) / 2;
+                    int col = (x - 1) / 4;
+                    if (row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE && x % 4 == 2) {
+                        int val = board[row][col];
+                        if (val != 0) {
+                            setTextColor(val); // Player X or O
+                            cout << (val % 2 == 1 ? "X" : "O");
+                            setTextColor(7); // Reset color
+                        } else {
+                            cout << " ";
+                        }
                     } else {
                         cout << " ";
                     }
@@ -37,5 +39,34 @@ void drawBoard() {
         }
         cout << endl;
     }
-    cout << endl;
+}
+
+bool placeMove(int row, int col, int player) {
+    if (row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE && board[row][col] == 0) {
+        board[row][col] = player;
+        return true;
+    }
+    return false;
+}
+
+bool checkWin(int row, int col, int player) {
+    // Check horizontal, vertical, and both diagonals
+    return checkDirection(row, col, 0, 1, player) || // Horizontal
+           checkDirection(row, col, 1, 0, player) || // Vertical
+           checkDirection(row, col, 1, 1, player) || // Diagonal `
+           checkDirection(row, col, 1, -1, player);   // Diagonal /
+}
+
+bool checkDirection(int row, int col, int dRow, int dCol, int player) {
+    int count = 1;
+    for (int i = 1; i < WINNING_COUNT; i++) {
+        int r = row - i * dRow;
+        int c = col - i * dCol;
+        if (r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE && board[r][c] == player) {
+            count++;
+        } else {
+            break;
+        }
+    }
+    return count >= WINNING_COUNT;
 }
