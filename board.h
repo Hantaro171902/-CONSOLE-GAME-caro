@@ -25,7 +25,7 @@ public:
     Board();
 
     void draw() const;
-    bool placePiece(int row, int col, CellState player);
+    bool placeMove(int row, int col, CellState player);
     bool checkWin(int row, int col, CellState player) const;
     CellState getCell(int row, int col) const;
     void reset();
