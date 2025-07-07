@@ -60,3 +60,11 @@ InputKey getInputKey() {
     
     return key;
 }
+
+void playSound(SoundEffect effect) {
+    switch (effect) {
+        case CLICK:   system("aplay sounds/click.wav &"); break;
+        case VICTORY: system("aplay sounds/victory.wav &"); break;
+        case DEFEAT:  system("aplay sounds/defeat.wav &"); break;
+    }
+}

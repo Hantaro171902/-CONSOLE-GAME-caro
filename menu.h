@@ -21,6 +21,14 @@
 
 // Instructions
 
+// ╔═══════╦══════════╦══════════╦═══════╗
+// ║               INSTRUCTION ║
+// ╠═══════╩══════════╬══════════╩═══════╣
+// ║ A: LEFT ║ D: RIGHT ║ W: UP ║ S: DOWN ║
+// ║ ENTER: PLACE MOVE ║ ESC: EXIT ║
+// ║     Score: 0     ║
+// ╚══════════════════╩══════════════════╝
+
 using namespace std;
 
 void drawMainMenu();

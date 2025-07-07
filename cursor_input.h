@@ -18,4 +18,12 @@ enum class InputKey {
     ESC
 };
 
+// Play sound effects
+enum SoundEffect {
+    CLICK,
+    VICTORY,
+    DEFEAT
+};
+
+SoundEffect playSound(SoundEffect effect);
 InputKey getInputKey();
