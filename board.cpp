@@ -10,7 +10,8 @@ using namespace std;
 Board::Board() {
     grid.resize(BOARD_SIZE, vector<CellState>(BOARD_SIZE, CellState::EMPTY));
 }
-void Board::draw() const {
+
+void Board::draw(int cursorRow, int cursorCol) const {
     clearScreen();
 
     // Print column headers
@@ -57,6 +58,10 @@ void Board::draw() const {
                     int row = (y - 1) / 2;
                     int col = (x - 1) / 4;
                     if ((x - 2) % 4 == 0 && row < BOARD_SIZE && col < BOARD_SIZE) {
+                        bool isCursor = (row == cursorRow && col == cursorCol);
+
+                        if (isCursor) cout << "\033[7m"; // Invert colors for cursor
+
                         CellState val = grid[row][col];
                         if (val != CellState::EMPTY) {
                             setTextColor(static_cast<int>(val));
@@ -65,6 +70,8 @@ void Board::draw() const {
                         } else {
                             cout << " ";
                         }
+
+                        if (isCursor) cout << "\033[0m"; // Reset colors for cursor
                     } else {
                         cout << " ";
                     }

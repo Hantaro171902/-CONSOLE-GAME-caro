@@ -24,7 +24,7 @@ private:
 public:
     Board();
 
-    void draw() const;
+    void draw(int cursorRow, int cursorCol) const;
     bool placeMove(int row, int col, CellState player);
     bool checkWin(int row, int col, CellState player) const;
     bool checkDirection(int row, int col, int dRow, int dCol, CellState player) const;

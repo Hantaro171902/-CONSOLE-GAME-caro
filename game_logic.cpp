@@ -24,7 +24,7 @@ void Game::run() {
 }
 
 void Game::render() {
-    board.draw();
+    board.draw(cursorRow, cursorCol);
     gotoXY(0, 2 * BOARD_SIZE + 2);
     setTextColor(static_cast<int>(currentPlayer->getType()));
     cout << (currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O") << "'s turn." << endl;

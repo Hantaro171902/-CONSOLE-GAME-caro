@@ -26,20 +26,21 @@ InputKey getInputKey() {
                     case 'B': return InputKey::DOWN;
                     case 'C': return InputKey::RIGHT;
                     case 'D': return InputKey::LEFT;
+                }
+            }
+        } else {
+            switch (ch) {
+                case 'w': case 'W': return InputKey::UP;
+                case 's': case 'S': return InputKey::DOWN;
+                case 'a': case 'A': return InputKey::LEFT;
+                case 'd': case 'D': return InputKey::RIGHT;
+                case '\n': return InputKey::ENTER;
+                case 27:   return InputKey::ESC; // Escape
+                default:   return InputKey::NONE;
             }
         }
-    } else {
-        switch (ch) {
-            case 'w': case 'W': return InputKey::UP;
-            case 's': case 'S': return InputKey::DOWN;
-            case 'a': case 'A': return InputKey::LEFT;
-            case 'd': case 'D': return InputKey::RIGHT;
-            case '\n': return InputKey::ENTER;
-            case 27:   return InputKey::ESC; // Escape
-            default:   return InputKey::NONE;
-        }
     }
-    
+
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore original settings
     return InputKey::NONE;
 }
