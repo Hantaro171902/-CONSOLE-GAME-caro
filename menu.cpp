@@ -61,3 +61,107 @@ void drawMainMenu() {
 
     setTextColor(7); // Reset to default
 }
+
+
+// Draw side menu
+// ╔═══════╦══════════╦══════════╦═══════╗
+// ║ 00:00 ║ Player O ║ Player X ║ 00:00 ║
+// ╠═══════╩══════════╬══════════╩═══════╣
+// ║     Score: 0     ║     Score: 0     ║
+// ╚══════════════════╩══════════════════╝
+
+void drawSideMenu(int x, int y, int scoreX, int scoreO, int timeX, int timeO) {
+    const int MENU_WIDTH = 35;
+    const int MENU_HEIGHT = 6;
+
+    string title = "CARO GAME SCORE";
+    ostringstream rowO, rowX;
+    rowO << " Player O: " << setw(2) << scoreO << " | Time: " << setw(2) << timeO << "s ";
+    rowX << " Player X: " << setw(2) << scoreX << " | Time: " << setw(2) << timeX << "s ";
+
+    // Top border
+    gotoXY(x, y);
+    cout << SYMBOL_DOUBLE_TOP_LEFT;
+    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_TOP_RIGHT;
+
+    // Draw the title row
+    gotoXY(x, y + 1);
+    cout << SYMBOL_DOUBLE_VERTICAL;
+    cout << title;
+    for (int i = 0; i < MENU_WIDTH - title.length(); ++i) cout << " ";
+    cout << SYMBOL_DOUBLE_VERTICAL;
+
+    // Draw the divider
+    gotoXY(x, y + 2);
+    cout << SYMBOL_DOUBLE_T_LEFT;
+    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_T_RIGHT;
+
+    // Draw O
+    gotoXY(x, y + 3);
+    cout << SYMBOL_DOUBLE_VERTICAL << rowO.str();
+    for (int i = 0; i < MENU_WIDTH - rowO.str().length(); ++i) cout << " ";
+    cout << SYMBOL_DOUBLE_VERTICAL;
+
+    // Draw X
+    gotoXY(x, y + 4);
+    cout << SYMBOL_DOUBLE_VERTICAL << rowX.str();
+    for (int i = 0; i < MENU_WIDTH - rowX.str().length(); ++i) cout << " ";
+    cout << SYMBOL_DOUBLE_VERTICAL;
+
+    // Draw the bottom border
+    gotoXY(x, y + 5);
+    cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
+    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_BOTTOM_RIGHT;
+}
+
+// Draw instructions box
+// ╔═════════════════════════════════╗
+// ║          INSTRUCTIONS           ║
+// ╠═════════════════════════════════╣
+// ║ ↑ ↓ ← →  : Move cursor          ║
+// ║ ENTER    : Place move           ║
+// ║ ESC      : Exit game            ║
+// ║ Q        : Quit to menu         ║
+// ║ R        : Restart game         ║
+// ╚═════════════════════════════════╝
+
+void drawInstructions(int x, int y) {
+    const int BOX_WIDTH = 30;
+
+        const vector<string> instructions = {
+        "↑ ↓ ← →  : Move cursor",
+        "ENTER    : Place move",
+        "ESC      : Exit game",
+        "Q        : Quit to menu",
+        "R        : Restart game"
+    };
+
+    int height = instructions.size() + 3; // 3 for top, title, bottom
+
+    // Top border
+    gotoXY(x, y);
+    cout << SYMBOL_DOUBLE_TOP_LEFT;
+    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_TOP_RIGHT;
+
+    // Title
+    gotoXY(x, y + 1);
+    cout << SYMBOL_DOUBLE_VERTICAL << " INSTRUCTIONS";
+    for (int i = 0; i < MENU_WIDTH - 12; ++i) cout << " ";
+    cout << SYMBOL_DOUBLE_VERTICAL;
+
+    // Instruction lines
+    for (int i = 0; i < instructions.size(); ++i) {
+        gotoXY(x, y + 2 + i);
+        cout << SYMBOL_DOUBLE_VERTICAL << " " << left << setw(MENU_WIDTH) << instructions[i] << SYMBOL_DOUBLE_VERTICAL;
+    }
+
+    // Bottom border
+    gotoXY(x, y + height - 1);
+    cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
+    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_BOTTOM_RIGHT;
+}

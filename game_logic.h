@@ -2,6 +2,7 @@
 
 #include "board.h"
 #include "player.h"
+#include "menu.h"
 
 class Game {
 private:
@@ -10,7 +11,8 @@ private:
     Player playerO;
     Player* currentPlayer;
     bool isRunning;
-
+    Menu menu; 
+    
     int cursorRow = 0; // Cursor position for input
     int cursorCol = 0; // Cursor position for input
 

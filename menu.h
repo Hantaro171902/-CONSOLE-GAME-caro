@@ -12,26 +12,22 @@
 // ╚═════════════════════════════════╝
 // // WINNER ROW
 
-// ╔═══════╦══════════╦══════════╦═══════╗
-// ║ 00:00 ║ Player O ║ Player X ║ 00:00 ║
-// ╠═══════╩══════════╬══════════╩═══════╣
-// ║     Score: 0     ║     Score: 0     ║
-// ╚══════════════════╩══════════════════╝
-
-
-// Instructions
-
-// ╔═══════╦══════════╦══════════╦═══════╗
-// ║               INSTRUCTION ║
-// ╠═══════╩══════════╬══════════╩═══════╣
-// ║ A: LEFT ║ D: RIGHT ║ W: UP ║ S: DOWN ║
-// ║ ENTER: PLACE MOVE ║ ESC: EXIT ║
-// ║     Score: 0     ║
-// ╚══════════════════╩══════════════════╝
-
 using namespace std;
 
-void drawMainMenu();
+class Menu {
+private:
+
+    // Add any private members if needed
+public:
+    void drawMainMenu();
+    // void drawSettingsMenu();
+    // void drawAboutMenu();
+    // void drawExitMenu();
+    void drawInstructions(int x, int y);
+    void drawSideMenu(int x, int y, int scoreX, int scoreO, int timeX, int timeO);
+};
+
+
 // void drawSettingsMenu();
 // void drawAboutMenu();
 // void drawExitMenu();
