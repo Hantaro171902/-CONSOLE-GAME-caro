@@ -110,6 +110,8 @@ bool Board::checkWin(int row, int col, CellState player) const{
 
 bool Board::checkDirection(int row, int col, int dRow, int dCol, CellState player ) const {
     int count = 1;
+
+    // Check in the positive direction
     for (int i = 1; i < WINNING_COUNT; i++) {
         int r = row - i * dRow;
         int c = col - i * dCol;
@@ -119,6 +121,18 @@ bool Board::checkDirection(int row, int col, int dRow, int dCol, CellState playe
             break;
         }
     }
+
+    // Check in the negative direction
+    for (int i = 1; i < WINNING_COUNT; i++) {
+        int r = row + i * dRow;
+        int c = col + i * dCol;
+        if (r >= 0 && r < BOARD_SIZE && c >= 0 && c < BOARD_SIZE && grid[r][c] == player) {
+            count++;
+        } else {
+            break;
+        }
+    }
+    
     return count >= WINNING_COUNT;
 }
 
