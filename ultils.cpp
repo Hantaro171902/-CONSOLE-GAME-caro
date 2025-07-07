@@ -78,6 +78,7 @@ const char SYMBOL_DOUBLE_T_LEFT[]       = "\u2560"; // ╠
 const char SYMBOL_DOUBLE_T_RIGHT[]      = "\u2563"; // ╣
 const char SYMBOL_DOUBLE_T_TOP[]        = "\u2566"; // ╦
 const char SYMBOL_DOUBLE_T_BOTTOM[]     = "\u2569"; // ╩
+const char SYMBOL_DOUBLE_INTERSECT[]    = "\u256C"; // ╬
 
 void setTextColor(int color) {
     // ANSI escape codes for text colors

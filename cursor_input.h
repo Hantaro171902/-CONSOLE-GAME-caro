@@ -1,0 +1,21 @@
+#pragma once
+
+// Input control keys
+// const int KEY_UP = 65;    // Arrow Up
+// const int KEY_DOWN = 66;  // Arrow Down
+// const int KEY_LEFT = 68;  // Arrow Left
+// const int KEY_RIGHT = 67; // Arrow Right
+// const int KEY_ENTER = 10; // Enter key
+// const int KEY_ESCAPE = 27; // Escape key
+
+enum class InputKey {
+    NONE,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    ENTER,
+    ESC
+};
+
+InputKey getInputKey();

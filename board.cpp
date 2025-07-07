@@ -10,50 +10,71 @@ using namespace std;
 Board::Board() {
     grid.resize(BOARD_SIZE, vector<CellState>(BOARD_SIZE, CellState::EMPTY));
 }
-
 void Board::draw() const {
     clearScreen();
 
-    // Column headers
+    // Print column headers
     cout << "    ";
-    for (int col = 0; col < BOARD_SIZE; col++) {
-        int colNumber = col + 1;
-        cout << setw(3) << colNumber << " ";
+    for (int col = 1; col <= BOARD_SIZE; col++) {
+        cout << setw(3) << col << " ";
     }
     cout << endl;
 
-    
     for (int y = 0; y <= 2 * BOARD_SIZE; y++) {
-        if (y % 2 == 0) { 
-            // Row headers
-            cout << "   ";
-            for (int col = 0; col <= BOARD_SIZE; col++) {
-                cout << SYMBOL_INTERSECT << SYMBOL_HORIZONTAL << SYMBOL_HORIZONTAL << SYMBOL_HORIZONTAL;
-            }
-            cout << endl;
-        } else { 
-            // Row with cells
-            int rowNum = (y - 1) / 2 + 1;
-            cout << setw(2) << rowNum << " ";
+        // Print row numbers
+        if (y % 2 == 1) {
+            cout << setw(3) << (y / 2 + 1) << " ";
+        } else {
+            cout << "    ";
+        }
 
-            for (int x = 0; x <= BOARD_SIZE; ++x) {
-                cout << SYMBOL_VERTICAL;
+        for (int x = 0; x <= 4 * BOARD_SIZE; x++) {
+            bool isBorderRow = (y == 0 || y == 2 * BOARD_SIZE);
+            bool isBorderCol = (x == 0 || x == 4 * BOARD_SIZE);
 
-                if (x < BOARD_SIZE) {
-                    CellState val = grid[rowNum - 1][x];
-                    if (val != CellState::EMPTY) {
-                        setTextColor(static_cast<int>(val));
-                        cout << " " << (val == CellState::PLAYER_X ? "X" : "O") << " ";
-                        setTextColor(7);
+            if (y % 2 == 0) { // Horizontal lines
+                if (x % 4 == 0) {
+                    // Corners and border junctions
+                    if (isBorderRow && isBorderCol) {
+                        cout << (y == 0
+                                 ? (x == 0 ? SYMBOL_DOUBLE_TOP_LEFT : SYMBOL_DOUBLE_TOP_RIGHT)
+                                 : (x == 0 ? SYMBOL_DOUBLE_BOTTOM_LEFT : SYMBOL_DOUBLE_BOTTOM_RIGHT));
+                    } else if (isBorderRow) {
+                        cout << (y == 0 ? SYMBOL_DOUBLE_T_TOP : SYMBOL_DOUBLE_T_BOTTOM);
+                    } else if (isBorderCol) {
+                        cout << (x == 0 ? SYMBOL_DOUBLE_T_LEFT : SYMBOL_DOUBLE_T_RIGHT);
                     } else {
-                        cout << "   ";
+                        cout << SYMBOL_INTERSECT;
+                    }
+                } else {
+                    // Horizontal lines
+                    cout << (isBorderRow ? SYMBOL_DOUBLE_HORIZONTAL : SYMBOL_HORIZONTAL);
+                }
+            } else { // Vertical lines and cells
+                if (x % 4 == 0) {
+                    cout << (isBorderCol ? SYMBOL_DOUBLE_VERTICAL : SYMBOL_VERTICAL);
+                } else {
+                    int row = (y - 1) / 2;
+                    int col = (x - 1) / 4;
+                    if ((x - 2) % 4 == 0 && row < BOARD_SIZE && col < BOARD_SIZE) {
+                        CellState val = grid[row][col];
+                        if (val != CellState::EMPTY) {
+                            setTextColor(static_cast<int>(val));
+                            cout << (val == CellState::PLAYER_X ? "X" : "O");
+                            setTextColor(7);
+                        } else {
+                            cout << " ";
+                        }
+                    } else {
+                        cout << " ";
                     }
                 }
             }
-            cout << endl;
         }
+        cout << endl;
     }
 }
+
 
 bool Board::placeMove(int row, int col, CellState player) {
     if (grid[row][col] == CellState::EMPTY) {

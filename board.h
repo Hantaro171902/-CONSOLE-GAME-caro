@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constants for board size
-const int BOARD_SIZE = 20; 
+const int BOARD_SIZE = 15; 
 const int WINNING_COUNT = 5; // 5 in a row to win
 
 

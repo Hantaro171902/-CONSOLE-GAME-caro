@@ -32,4 +32,3 @@ extern const char SYMBOL_DOUBLE_T_RIGHT[];
 extern const char SYMBOL_DOUBLE_T_TOP[];
 extern const char SYMBOL_DOUBLE_T_BOTTOM[];
 extern const char SYMBOL_DOUBLE_INTERSECT[];
-
