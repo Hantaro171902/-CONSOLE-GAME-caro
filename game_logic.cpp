@@ -105,8 +105,13 @@ void Game::handleMove() {
                     }
                 }
                 break;
+            }
+            case InputKey::ESC:
+                isRunning = false; // Exit the game
+                break;
             default:
                 break;
+        }
     }
 }
 
