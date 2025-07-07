@@ -64,9 +64,14 @@ void Board::draw(int cursorRow, int cursorCol) const {
 
                         CellState val = grid[row][col];
                         if (val != CellState::EMPTY) {
-                            setTextColor(static_cast<int>(val));
-                            cout << (val == CellState::PLAYER_X ? "X" : "O");
-                            setTextColor(7);
+                            if (val == CellState::PLAYER_X) {
+                                setTextColor(34); // Blue
+                                cout << "X";
+                            } else if (val == CellState::PLAYER_O) {
+                                setTextColor(31); // Red
+                                cout << "O";
+                            }
+                            setTextColor(7); // Reset color
                         } else {
                             cout << " ";
                         }
