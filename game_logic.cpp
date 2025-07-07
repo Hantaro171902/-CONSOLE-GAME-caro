@@ -32,22 +32,39 @@ void Game::render() {
 }
 
 void Game::handleMove() {
-    int row, col;
-    cout << "Enter row and column: ";
-    cin >> row >> col;
-    row--;
-    col--;
+    // int row, col;
+    // cout << "Enter row and column: ";
+    // cin >> row >> col;
+    // row--;
+    // col--;
 
-    if (board.placeMove(row, col, currentPlayer->getType())) {
-        if (board.checkWin(row, col, currentPlayer->getType())) {
-            render();
-            displayWinner();
-            isRunning = false;
-        } else {
-            switchTurn();
-        }
-    } else {
-        cout << "Invalid move. Try again." << endl;
+    // if (board.placeMove(row, col, currentPlayer->getType())) {
+    //     if (board.checkWin(row, col, currentPlayer->getType())) {
+    //         render();
+    //         displayWinner();
+    //         isRunning = false;
+    //     } else {
+    //         switchTurn();
+    //     }
+    // } else {
+    //     cout << "Invalid move. Try again." << endl;
+    // }
+
+    // Handle input for cursor movement and placing moves
+    InputKey key = getInputKey();
+
+    switch (key) {
+        case InputKey::UP:
+            // Move cursor up
+            break;
+        case InputKey::DOWN:
+            // Move cursor down
+            break;
+        case InputKey::ENTER:
+            // Place move
+            break;
+        default:
+            break;
     }
 }
 
@@ -66,14 +83,4 @@ void Game::resetGame() {
     board.reset();
     currentPlayer = &playerX;
     isRunning = true;
-}
-
-InputKey key = getInputKey();
-
-switch (key) {
-    case InputKey::UP:    cursorY--; break;
-    case InputKey::DOWN:  cursorY++; break;
-    case InputKey::LEFT:  cursorX--; break;
-    case InputKey::RIGHT: cursorX++; break;
-    case InputKey::ENTER: placeMove(cursorY, cursorX); break;
 }
