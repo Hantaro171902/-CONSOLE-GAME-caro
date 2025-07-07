@@ -32,8 +32,10 @@ void Game::render() {
 
 void Game::handleMove() {
     int row, col;
-    cout << "Enter row and column (0-based): ";
+    cout << "Enter row and column: ";
     cin >> row >> col;
+    row--;
+    col--;
 
     if (board.placeMove(row, col, currentPlayer->getType())) {
         if (board.checkWin(row, col, currentPlayer->getType())) {
