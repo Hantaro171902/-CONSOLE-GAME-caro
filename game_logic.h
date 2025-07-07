@@ -11,6 +11,9 @@ private:
     Player* currentPlayer;
     bool isRunning;
 
+    int cursorRow = 0; // Cursor position for input
+    int cursorCol = 0; // Cursor position for input
+
 public:
     Game();
     void init();

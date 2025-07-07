@@ -53,18 +53,60 @@ void Game::handleMove() {
     // Handle input for cursor movement and placing moves
     InputKey key = getInputKey();
 
-    switch (key) {
-        case InputKey::UP:
-            // Move cursor up
-            break;
-        case InputKey::DOWN:
-            // Move cursor down
-            break;
-        case InputKey::ENTER:
-            // Place move
-            break;
-        default:
-            break;
+    // Movment logic based on current player
+    if (currentPlayer->getType() == CellState::PLAYER_X) {
+        switch (key) {
+            case InputKey::UP:  if (cursorRow > 0) cursorRow--; // Move cursor up
+                break;
+            case InputKey::DOWN: if (cursorRow < BOARD_SIZE - 1) cursorRow++; // Move cursor down
+                break;
+            case InputKey::LEFT: if (cursorCol > 0) cursorCol--; // Move cursor left
+                break;
+            case InputKey::RIGHT: if (cursorCol < BOARD_SIZE - 1) cursorCol++; // Move cursor right
+                break;
+            case InputKey::ENTER: {
+               
+                if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {
+                    if (board.checkWin(cursorRow, cursorCol, currentPlayer->getType())) {
+                        render();
+                        displayWinner();
+                        isRunning = false;
+                    } else {
+                        switchTurn();
+                    }
+                } 
+                break;
+            }
+            case InputKey::ESC:
+                isRunning = false; // Exit the game
+                break;
+            default:
+                break;
+        }
+    } else {
+        // Use WASD keys for Player O
+        switch (key) {
+            case InputKey::UP: if (cursorRow > 0) cursorRow--; // Move cursor up
+                break;
+            case InputKey::DOWN: if (cursorRow < BOARD_SIZE - 1) cursorRow++; // Move cursor down
+                break;
+            case InputKey::LEFT: if (cursorCol > 0) cursorCol--; // Move cursor left
+                break;
+            case InputKey::RIGHT: if (cursorCol < BOARD_SIZE - 1) cursorCol++; // Move cursor right
+                break;
+            case InputKey::ENTER: {
+                if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {
+                    if (board.checkWin(cursorRow, cursorCol, currentPlayer->getType())) {
+                        render();
+                        displayWinner();
+                        isRunning = false;
+                    } else {
+                        switchTurn();   
+                    }
+                }
+                break;
+            default:
+                break;
     }
 }
 
