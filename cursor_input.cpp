@@ -13,24 +13,36 @@ InputKey getInputKey() {
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 
     InputKey key = InputKey::NONE;
-    char ch = getch();git add 
+    char ch1 = getchar();
 
-
-    if (kbhit()) {
-        int ch = getch();
-        if (ch == 27) { // Escape key
-            return InputKey::ESC;
-        } else if (ch == 10 || ch == 13) { // Enter key
-            return InputKey::ENTER;
-        } else if (ch == 65) { // Arrow Up
-            return InputKey::UP;
-        } else if (ch == 66) { // Arrow Down
-            return InputKey::DOWN;
-        } else if (ch == 68) { // Arrow Left
-            return InputKey::LEFT;
-        } else if (ch == 67) { // Arrow Right
-            return InputKey::RIGHT;
+    if (ch1 == "\033") { // Escape sequence
+        char ch2 = getchar();
+        char ch3 = getchar();
+        if (ch2 == "[") {
+            switch (ch3) {
+                case 'A': // Arrow Up
+                    key = InputKey::UP;
+                    break;
+                case 'B': // Arrow Down
+                    key = InputKey::DOWN;
+                    break;
+                case 'C': // Arrow Right
+                    key = InputKey::RIGHT;
+                    break;
+                case 'D': // Arrow Left
+                    key = InputKey::LEFT;
+                    break;
+                default:
+                    key = InputKey::NONE;
+                    break;
+            }
+        } else if (ch1 == "\n" || ch1 == '\r') { // Enter key
+            key = InputKey::ENTER;
+        } else if (ch1 == 27) { // Escape key
+            key = InputKey::ESC;
         }
     }
-    return InputKey::NONE;
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt); // Restore old terminal settings
+    return key;
 }

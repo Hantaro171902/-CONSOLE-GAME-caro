@@ -1,6 +1,7 @@
 // game_logic.cpp
 #include "game_logic.h"
 #include "ultils.h"
+#include "cursor_input.h"
 #include <iostream>
 
 using namespace std;
@@ -65,4 +66,14 @@ void Game::resetGame() {
     board.reset();
     currentPlayer = &playerX;
     isRunning = true;
+}
+
+InputKey key = getInputKey();
+
+switch (key) {
+    case InputKey::UP:    cursorY--; break;
+    case InputKey::DOWN:  cursorY++; break;
+    case InputKey::LEFT:  cursorX--; break;
+    case InputKey::RIGHT: cursorX++; break;
+    case InputKey::ENTER: placeMove(cursorY, cursorX); break;
 }
