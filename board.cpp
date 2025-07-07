@@ -79,7 +79,16 @@ void Board::draw(int cursorRow, int cursorCol) const {
             }
         }
         cout << endl;
+
+      
+
     }
+    // Move real terminal cursor to blinking cell
+    int termY = 2 + cursorRow * 2;      // +2 for header offset
+    int termX = 5 + cursorCol * 4;      // +5 for padding/row label
+    gotoXY(termX, termY);
+    cout << "\033[?25h"; // Show the terminal cursor
+    cout.flush();
 }
 
 

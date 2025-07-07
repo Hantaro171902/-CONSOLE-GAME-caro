@@ -50,7 +50,12 @@ void gotoXY(int x, int y) {
 }
 
 void clearScreen() {
-    printf("\033[2J\033[1;1H");
+    // printf("\033[2J\033[1;1H");
+    // Full terminal reset (clears everything, cursor, formatting, etc.)
+    cout << "\033c";
+
+    // Optionally hide cursor while drawing
+    cout << "\033[?25l";
 }
 
 // Box drawing characters
