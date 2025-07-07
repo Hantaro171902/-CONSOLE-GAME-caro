@@ -67,6 +67,18 @@ const char SYMBOL_T_BOTTOM[]     = "\u2534"; // ┴
 const char SYMBOL_INTERSECT[]    = "\u253C"; // ┼
 
 
+// Double line box drawing characters
+const char SYMBOL_DOUBLE_HORIZONTAL[]   = "\u2550"; // ═
+const char SYMBOL_DOUBLE_VERTICAL[]     = "\u2551"; // ║
+const char SYMBOL_DOUBLE_TOP_LEFT[]     = "\u2554"; // ╔
+const char SYMBOL_DOUBLE_TOP_RIGHT[]    = "\u2557"; // ╗
+const char SYMBOL_DOUBLE_BOTTOM_LEFT[]  = "\u255A"; // ╚    
+const char SYMBOL_DOUBLE_BOTTOM_RIGHT[] = "\u255D"; // ╝
+const char SYMBOL_DOUBLE_T_LEFT[]       = "\u2560"; // ╠
+const char SYMBOL_DOUBLE_T_RIGHT[]      = "\u2563"; // ╣
+const char SYMBOL_DOUBLE_T_TOP[]        = "\u2566"; // ╦
+const char SYMBOL_DOUBLE_T_BOTTOM[]     = "\u2569"; // ╩
+
 void setTextColor(int color) {
     // ANSI escape codes for text colors
     switch (color) {

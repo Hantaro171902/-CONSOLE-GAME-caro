@@ -16,7 +16,7 @@ void Board::draw() const {
 
     // Column headers
     cout << "    ";
-    for (int col = 0; col <= BOARD_SIZE; col++) {
+    for (int col = 0; col < BOARD_SIZE; col++) {
         int colNumber = col + 1;
         cout << setw(3) << colNumber << " ";
     }
