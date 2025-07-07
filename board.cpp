@@ -12,7 +12,7 @@ Board::Board() {
 }
 
 void Board::draw(int cursorRow, int cursorCol) const {
-    clearScreen();
+    clearTerminal();
 
     // Print column headers
     cout << "    ";
@@ -83,10 +83,10 @@ void Board::draw(int cursorRow, int cursorCol) const {
                 }
             }
         }
+
         cout << endl;
-
-      
-
+        cout << "\033[?25h"; // Show cursor again (if needed)
+        cout.flush();
     }
     // Move real terminal cursor to blinking cell
     int termY = 2 + cursorRow * 2;      // +2 for header offset

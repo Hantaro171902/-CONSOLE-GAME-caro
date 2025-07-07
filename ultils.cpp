@@ -50,12 +50,14 @@ void gotoXY(int x, int y) {
 }
 
 void clearScreen() {
-    // printf("\033[2J\033[1;1H");
+    cout << "\033[2J\033[1;1H";  // Clear screen + move to top-left
+    cout << "\033[?25l";         // Hide cursor
+}
+
+void clearTerminal() {
     // Full terminal reset (clears everything, cursor, formatting, etc.)
     cout << "\033c";
-
-    // Optionally hide cursor while drawing
-    cout << "\033[?25l";
+    cout << "\033[?25l"; // Hide cursor
 }
 
 // Box drawing characters
@@ -84,6 +86,9 @@ const char SYMBOL_DOUBLE_T_RIGHT[]      = "\u2563"; // ╣
 const char SYMBOL_DOUBLE_T_TOP[]        = "\u2566"; // ╦
 const char SYMBOL_DOUBLE_T_BOTTOM[]     = "\u2569"; // ╩
 const char SYMBOL_DOUBLE_INTERSECT[]    = "\u256C"; // ╬
+
+const char BLOCK_FULL[]   = "\u2588"; // █
+const char BLOCK_HALF[]   = "\u2592"; // ▒
 
 void setTextColor(int color) {
     // ANSI escape codes for text colors

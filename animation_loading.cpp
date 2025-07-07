@@ -2,6 +2,7 @@
 #include <thread>   // for sleep_for
 #include <chrono>   // for milliseconds
 #include "ultils.h" // for gotoXY and setTextColor
+#include "animation_loading.h"
 
 using namespace std;
 
@@ -11,32 +12,34 @@ void animLoading() {
 
     gotoXY(x, y);
     setTextColor(11); // Cyan
-    cout << char(218);
+    cout << SYMBOL_TOP_LEFT;
     for (int i = 0; i < width; i++) {
-        cout << char(196);
+        cout << SYMBOL_HORIZONTAL;
     }
-    cout << char(191);
+    cout << SYMBOL_TOP_RIGHT;
 
     gotoXY(x, y + 1);
-    cout << char(179);
+    cout << SYMBOL_VERTICAL;
+    setTextColor(8); // Gray
     for (int i = 0; i < width; i++) {
-        cout << " ";
+        cout << BLOCK_HALF;
     }
-    cout << char(179);
+    setTextColor(11); // Cyan
+    cout << SYMBOL_VERTICAL;
 
     gotoXY(x, y + 2);
-    cout << char(192);
+    cout << SYMBOL_BOTTOM_LEFT;
     for (int i = 0; i < width; i++) {
-        cout << char(196);
+        cout << SYMBOL_HORIZONTAL;
     }
-    cout << char(217);
+    cout << SYMBOL_BOTTOM_RIGHT;
 
     gotoXY(x + 1, y + 3);
     cout << ". . . LOADING . . .";
 
-    for (int i =0; i <= width; i++){
+    for (int i = 0; i <= width; i++) {
         gotoXY(x + 1 + i, y + 1);
-        cout << char(219); // Print the loading bar
+        cout << BLOCK_FULL; // Print the loading bar
         gotoXY(x + width + 3, y + 1);
         cout << "Loading... " << (i * 100 / width) << "%"; // Show percentage
         cout.flush(); // Ensure the output is displayed immediately

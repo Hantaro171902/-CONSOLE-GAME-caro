@@ -1,7 +1,10 @@
 #pragma once
+// #include <windows.h>
+// SetConsoleOutputCP(437); // Enables extended ASCII chars (╔═╗║ etc.)
 
 void gotoXY(int x, int y);
 void clearScreen();
+void clearTerminal(); // Full terminal reset
 void setTextColor(int color);
 void hideCursor();
 int getch();    // For key input
@@ -32,3 +35,6 @@ extern const char SYMBOL_DOUBLE_T_RIGHT[];
 extern const char SYMBOL_DOUBLE_T_TOP[];
 extern const char SYMBOL_DOUBLE_T_BOTTOM[];
 extern const char SYMBOL_DOUBLE_INTERSECT[];
+
+extern const char BLOCK_FULL[];
+extern const char BLOCK_HALF[];
