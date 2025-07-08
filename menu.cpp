@@ -2,14 +2,16 @@
 #include "menu.h"
 #include "ultils.h"
 #include <iomanip>
+#include <vector>
+#include <string>
 
 using namespace std;
 
-void drawMainMenu() {
+void Menu::drawMainMenu() {
     const int MENU_WIDTH = 40;
     const int MENU_HEIGHT = 8;
-    const x = 20;
-    const y = 5;
+    const int x = 20;
+    const int y = 5;
 
     clearScreen();
     setTextColor(14); // Yellow for menu title
@@ -71,7 +73,7 @@ void drawMainMenu() {
 // ║     Score: 0     ║     Score: 0     ║
 // ╚══════════════════╩══════════════════╝
 
-void drawSideMenu(int x, int y, int scoreX, int scoreO, int timeX, int timeO) {
+void Menu::drawSideMenu(int x, int y, int scoreX, int scoreO, int timeX, int timeO) {
     const int MENU_WIDTH = 35;
     const int MENU_HEIGHT = 6;
 
@@ -129,10 +131,10 @@ void drawSideMenu(int x, int y, int scoreX, int scoreO, int timeX, int timeO) {
 // ║ R        : Restart game         ║
 // ╚═════════════════════════════════╝
 
-void drawInstructions(int x, int y) {
+void Menu::drawInstructions(int x, int y) {
     const int BOX_WIDTH = 30;
 
-        const vector<string> instructions = {
+    const vector<string> instructions = {
         "↑ ↓ ← →  : Move cursor",
         "ENTER    : Place move",
         "ESC      : Exit game",
@@ -145,24 +147,24 @@ void drawInstructions(int x, int y) {
     // Top border
     gotoXY(x, y);
     cout << SYMBOL_DOUBLE_TOP_LEFT;
-    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
     cout << SYMBOL_DOUBLE_TOP_RIGHT;
 
     // Title
     gotoXY(x, y + 1);
     cout << SYMBOL_DOUBLE_VERTICAL << " INSTRUCTIONS";
-    for (int i = 0; i < MENU_WIDTH - 12; ++i) cout << " ";
+    for (int i = 0; i < BOX_WIDTH - 12; ++i) cout << " ";
     cout << SYMBOL_DOUBLE_VERTICAL;
 
     // Instruction lines
     for (int i = 0; i < instructions.size(); ++i) {
         gotoXY(x, y + 2 + i);
-        cout << SYMBOL_DOUBLE_VERTICAL << " " << left << setw(MENU_WIDTH) << instructions[i] << SYMBOL_DOUBLE_VERTICAL;
+        cout << SYMBOL_DOUBLE_VERTICAL << " " << left << setw(BOX_WIDTH) << instructions[i] << SYMBOL_DOUBLE_VERTICAL;
     }
 
     // Bottom border
     gotoXY(x, y + height - 1);
     cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
-    for (int i = 0; i < MENU_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
     cout << SYMBOL_DOUBLE_BOTTOM_RIGHT;
 }

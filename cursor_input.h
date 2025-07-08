@@ -25,5 +25,5 @@ enum SoundEffect {
     DEFEAT
 };
 
-SoundEffect playSound(SoundEffect effect);
+void playSound(SoundEffect effect);
 InputKey getInputKey();

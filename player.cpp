@@ -28,3 +28,15 @@ void Player::incrementScore() {
 void Player::resetScore() {
     score = 0;
 }
+
+int Player::getTime() const {
+    return timeTaken;
+}
+
+void Player::addTime(int seconds) {
+    timeTaken += seconds;
+}
+
+void Player::resetTime() {
+    timeTaken = 0;
+}

@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 // CONSOLE
 #ifdef _WIN32
 
@@ -46,8 +45,9 @@ bool kbhit() {
 #include <fcntl.h>
 
 void gotoXY(int x, int y) {
-    printf("\033[%d;%dH", y + 1, x + 1);
+    printf("\033[%d;%dH", y + 1, x + 1); // ANSI escape code for cursor
 }
+
 
 void clearScreen() {
     cout << "\033[2J\033[1;1H";  // Clear screen + move to top-left
@@ -93,20 +93,20 @@ const char BLOCK_HALF[]   = "\u2592"; // ▒
 void setTextColor(int color) {
     // ANSI escape codes for text colors
     switch (color) {
-        case 30: printf("\033[30m"); break; // Black
-        case 31: printf("\033[31m"); break; // Red
-        case 32: printf("\033[32m"); break; // Green
-        case 33: printf("\033[33m"); break; // Yellow
-        case 34: printf("\033[34m"); break; // Blue
-        case 35: printf("\033[35m"); break; // Magenta
-        case 36: printf("\033[36m"); break; // Cyan
-        case 37: printf("\033[37m"); break; // White
-        default: printf("\033[0m"); break; // Reset to default
+        case 30: cout << "\033[30m"; break; // Black
+        case 31: cout << "\033[31m"; break; // Red
+        case 32: cout << "\033[32m"; break; // Green
+        case 33: cout << "\033[33m"; break; // Yellow
+        case 34: cout << "\033[34m"; break; // Blue
+        case 35: cout << "\033[35m"; break; // Magenta
+        case 36: cout << "\033[36m"; break; // Cyan
+        case 37: cout << "\033[37m"; break; // White
+        default: cout << "\033[0m"; break; // Reset to default
     }
 }
 
 void hideCursor() {
-    printf("\033[?25l"); // Hide cursor
+    cout << "\033[?25l"; // Hide cursor
 }
 
 int getch() {

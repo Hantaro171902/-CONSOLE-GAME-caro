@@ -2,6 +2,10 @@
 #include "game_logic.h"
 #include "ultils.h"
 #include "cursor_input.h"
+#include <chrono>
+#include <iomanip>
+#include <vector>
+#include <string>
 
 #include <iostream>
 
@@ -143,6 +147,13 @@ void Game::displayWinner() {
     setTextColor(static_cast<int>(currentPlayer->getType()));
     cout << (currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O") << " wins!" << endl;
     setTextColor(7);
+
+    // Increment the winner's score
+    if (currentPlayer->getType() == CellState::PLAYER_X) {
+        playerX.incrementScore();
+    } else {
+        playerO.incrementScore(); 
+    }
 }
 
 void Game::resetGame() {
