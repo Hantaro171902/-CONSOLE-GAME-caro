@@ -12,6 +12,8 @@ Game::Game() : playerX(CellState::PLAYER_X), playerO(CellState::PLAYER_O), isRun
 }
 
 void Game::init() {
+    startTime = std::chrono::steady_clock::now();
+
     board.reset();
     currentPlayer = &playerX;
     isRunning = true;
@@ -26,6 +28,13 @@ void Game::run() {
 
 void Game::render() {
     board.draw(cursorRow, cursorCol);
+
+    // Side menu
+    int sideX = 4 * BOARD_SIZE + 10; // Side menu position
+    menu.drawSideMenu(sideX, 2, playerX.getScore(), playerO.getScore(), playerX.getTime(), playerO.getTime());
+    menu.drawInstructions(sideX, 12);
+
+    // Current turn
     gotoXY(0, 2 * BOARD_SIZE + 2);
     setTextColor(static_cast<int>(currentPlayer->getType()));
     cout << (currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O") << "'s turn." << endl;
@@ -51,6 +60,7 @@ void Game::handleMove() {
     //     cout << "Invalid move. Try again." << endl;
     // }
 
+    
     // Handle input for cursor movement and placing moves
     InputKey key = getInputKey();
 
@@ -114,10 +124,18 @@ void Game::handleMove() {
                 break;
         }
     }
+
 }
 
 void Game::switchTurn() {
+    auto now = chrono::steady_clock::now();
+    int elapsed = chrono::duration_cast<chrono::seconds>(now - startTime).count();
+
+    if (currentPlayer->getType() == CellState::PLAYER_X) timeX += elapsed;
+    else timeO += elapsed;
+
     currentPlayer = (currentPlayer == &playerX) ? &playerO : &playerX;
+    startTime = chrono::steady_clock::now(); // Restart timer for next player
 }
 
 void Game::displayWinner() {

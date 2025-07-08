@@ -2,7 +2,8 @@
 
 using namespace std;
 
-Player::Player(CellState type, const string& name) : playerType(type), playerName(name) {}
+Player::Player(CellState type, const string& name) 
+    : playerType(type), playerName(name) {}
 
 CellState Player::getType() const {
     return playerType;
@@ -14,4 +15,16 @@ void Player::setName(const string& newName) {
 
 string Player::getName() const {
     return playerName;
+}
+
+int Player::getScore() const {
+    return score;
+}
+
+void Player::incrementScore() {
+    score++;
+}
+
+void Player::resetScore() {
+    score = 0;
 }

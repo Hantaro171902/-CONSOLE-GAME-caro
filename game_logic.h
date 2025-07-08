@@ -3,16 +3,24 @@
 #include "board.h"
 #include "player.h"
 #include "menu.h"
+#include <chrono>
+#include <iostream>
+
+using namespace std;
 
 class Game {
 private:
+    chrono::steady_clock::time_point startTime; // Start time for the game
+    int timeX; // Time taken by Player X
+    int timeO; // Time taken by Player O
+    
     Board board;
     Player playerX;
     Player playerO;
     Player* currentPlayer;
     bool isRunning;
     Menu menu; 
-    
+
     int cursorRow = 0; // Cursor position for input
     int cursorCol = 0; // Cursor position for input
 
