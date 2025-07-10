@@ -152,14 +152,34 @@ void Menu::drawInstructions(int x, int y) {
 
     // Title
     gotoXY(x, y + 1);
-    cout << SYMBOL_DOUBLE_VERTICAL << " INSTRUCTIONS";
-    for (int i = 0; i < BOX_WIDTH - 12; ++i) cout << " ";
+    cout << SYMBOL_DOUBLE_VERTICAL;
+    setTextColor(36); // Cyan
+    cout << " INSTRUCTIONS ";
+    setTextColor(7);
+    for (int i = 0; i < BOX_WIDTH - 15; ++i) cout << " ";
     cout << SYMBOL_DOUBLE_VERTICAL;
 
-    // Instruction lines
+    // Instructions
     for (int i = 0; i < instructions.size(); ++i) {
         gotoXY(x, y + 2 + i);
-        cout << SYMBOL_DOUBLE_VERTICAL << " " << left << setw(BOX_WIDTH) << instructions[i] << SYMBOL_DOUBLE_VERTICAL;
+        cout << SYMBOL_DOUBLE_VERTICAL << " ";
+
+        setTextColor(33); // Yellow for key part
+        string line = instructions[i];
+        size_t colon = line.find(':');
+        if (colon != string::npos) {
+            cout << left << setw(13) << line.substr(0, colon);
+            setTextColor(7); // Reset for instruction text
+            cout << " : " << line.substr(colon + 2);
+        } else {
+            cout << setw(BOX_WIDTH - 2) << line;
+        }
+
+        // Padding and right border
+        int contentLength = line.length();
+        int padding = BOX_WIDTH - 2 - contentLength;
+        for (int s = 0; s < padding; ++s) cout << " ";
+        cout << SYMBOL_DOUBLE_VERTICAL;
     }
 
     // Bottom border
@@ -167,4 +187,6 @@ void Menu::drawInstructions(int x, int y) {
     cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
     for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
     cout << SYMBOL_DOUBLE_BOTTOM_RIGHT;
+
+    setTextColor(7); // Reset color
 }
