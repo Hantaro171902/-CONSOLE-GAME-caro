@@ -147,13 +147,22 @@ void Game::displayWinner() {
     setTextColor(static_cast<int>(currentPlayer->getType()));
     cout << (currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O") << " wins!" << endl;
     setTextColor(7);
-
     // Increment the winner's score
+
     if (currentPlayer->getType() == CellState::PLAYER_X) {
         playerX.incrementScore();
     } else {
         playerO.incrementScore(); 
     }
+}
+
+void Game::moveHistory(vector<string>& history) const {
+
+    
+    string move = format("{}. Player{} ({}, {})", history.size() + 1,
+                     currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O",
+                     row + 1, col + 1);
+    history.push_back(move);
 }
 
 void Game::resetGame() {

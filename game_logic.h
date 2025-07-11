@@ -5,8 +5,16 @@
 #include "menu.h"
 #include <chrono>
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
+
+struct MoveRecord {
+    int row; // Row of the move
+    int col; // Column of the move
+    CellState player; // Player who made the move
+};
 
 class Game {
 private:
@@ -24,6 +32,8 @@ private:
     int cursorRow = 0; // Cursor position for input
     int cursorCol = 0; // Cursor position for input
 
+    vector<MoveRecord> moveHistory; // History of moves made in the game
+
 public:
     Game();
     void init();
@@ -39,5 +49,6 @@ public:
         return isRunning;
     };
     void resetGame();
+
 };
 

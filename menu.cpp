@@ -1,3 +1,4 @@
+// menu.cpp
 #include <iostream>
 #include "menu.h"
 #include "ultils.h"
@@ -184,6 +185,70 @@ void Menu::drawInstructions(int x, int y) {
 
     // Bottom border
     gotoXY(x, y + height - 1);
+    cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
+    for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_BOTTOM_RIGHT;
+
+    setTextColor(7); // Reset color
+}
+
+void Menu::drawLogo() {
+    const int x = 20;
+    const int y = 5;
+
+    clearScreen();
+    setTextColor(37); // Yellow for logo
+
+    gotoXY(x, y);
+    cout << "  _|_|_|    _|_|    _|_|_|      _|_|  ";
+    gotoXY(x, y + 1);
+    cout << "_|        _|    _|  _|    _|  _|    _|";
+    gotoXY(x, y + 2);
+    cout << "_|        _|_|_|_|  _|_|_|    _|    _|";
+    gotoXY(x, y + 3);
+    cout << "_|        _|    _|  _|    _|  _|    _|";
+    gotoXY(x, y + 4);
+    cout << "  _|_|_|  _|    _|  _|    _|    _|_|  ";
+
+}
+
+
+void Menu::drawMoveHistory(vector<string>& history, int x, int y) const {
+    const int BOX_WIDTH = 40;
+    const int BOX_HEIGHT = 10;
+
+    // Title
+    gotoXY(x + 2, y);
+    setTextColor(36); // Cyan for title
+    cout << " MOVE HISTORY ";
+    setTextColor(7); // Reset color
+
+    // Top border
+    gotoXY(x, y + 1);
+    cout << SYMBOL_DOUBLE_TOP_LEFT;
+    for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
+    cout << SYMBOL_DOUBLE_TOP_RIGHT;
+
+    // Draw the history
+    for (int i = 0; i < BOX_HEIGHT; ++i) {
+        gotoXY(x, y + 2 + i);
+        cout << SYMBOL_DOUBLE_VERTICAL << " ";
+       
+
+        if (i < history.size()) {
+            const MoveRecord& move = history[i];
+            string entry = to_string(i + 1) + ". Player " +
+                (move.player == CellState::PLAYER_X ? "X" : "O") +
+                " (" + to_string(move.row + 1) + ", " + to_string(move.col + 1) + ")";
+            cout << left << setw(BOX_WIDTH - 2) << entry; // Fill the line with the entry
+        } else {
+            cout << setw(BOX_WIDTH - 2) << " ";
+        }
+        cout << SYMBOL_DOUBLE_VERTICAL;
+    }
+
+    // Draw the bottom border
+    gotoXY(x, y + BOX_HEIGHT + 2);
     cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
     for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
     cout << SYMBOL_DOUBLE_BOTTOM_RIGHT;

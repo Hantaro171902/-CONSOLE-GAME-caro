@@ -20,6 +20,8 @@ private:
     // Add any private members if needed
 public:
     void drawMainMenu();
+    void drawLogo(int x, int y);
+    void drawMoveHistory(int x, int y, const vector<string>& history);
     // void drawSettingsMenu();
     // void drawAboutMenu();
     // void drawExitMenu();
