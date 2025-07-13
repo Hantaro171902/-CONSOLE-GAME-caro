@@ -183,8 +183,7 @@ void Menu::drawLogo() {
 
 }
 
-
-void Menu::drawMoveHistory(vector<MoveRecord>& history, int x, int y) const {
+void Menu::drawMoveHistory(const std::vector<MoveRecord>& history, int x, int y, int scrollOffset) const {
     const int BOX_WIDTH = 40;
     const int BOX_HEIGHT = 10;
 
@@ -192,7 +191,7 @@ void Menu::drawMoveHistory(vector<MoveRecord>& history, int x, int y) const {
     gotoXY(x + 2, y);
     setTextColor(36); // Cyan for title
     cout << " MOVE HISTORY   [ ] Scroll up, down";
-    setTextColor(7); // Reset color
+    setTextColor(7);
 
     // Top border
     gotoXY(x, y + 1);
@@ -200,21 +199,20 @@ void Menu::drawMoveHistory(vector<MoveRecord>& history, int x, int y) const {
     for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;
     cout << SYMBOL_DOUBLE_TOP_RIGHT;
 
-    // Body rows
     for (int i = 0; i < BOX_HEIGHT; ++i) {
         int moveIndex = scrollOffset + i;
         gotoXY(x, y + 2 + i);
         cout << SYMBOL_DOUBLE_VERTICAL << " ";
 
-        if (moveIndex < totalMoves) {
-            const MoveRecord& move = history[moveIndex];
+        if (moveIndex < history.size()) {
+            const auto& move = history[moveIndex];
             string entry = to_string(moveIndex + 1) + ". Player " +
                 (move.player == CellState::PLAYER_X ? "X" : "O") +
                 " (" + to_string(move.row + 1) + ", " + to_string(move.col + 1) + ")";
 
-            if (moveIndex == totalMoves - 1) setTextColor(8);  // Gray highlight for latest move
+            if (moveIndex == history.size() - 1) setTextColor(8); // highlight latest
             cout << left << setw(BOX_WIDTH - 2) << entry;
-            setTextColor(7); // Reset
+            setTextColor(7);
         } else {
             cout << setw(BOX_WIDTH - 2) << " ";
         }
@@ -222,7 +220,7 @@ void Menu::drawMoveHistory(vector<MoveRecord>& history, int x, int y) const {
         cout << SYMBOL_DOUBLE_VERTICAL;
     }
 
-    // Bottom border
+    // Bottom
     gotoXY(x, y + BOX_HEIGHT + 2);
     cout << SYMBOL_DOUBLE_BOTTOM_LEFT;
     for (int i = 0; i < BOX_WIDTH; ++i) cout << SYMBOL_DOUBLE_HORIZONTAL;

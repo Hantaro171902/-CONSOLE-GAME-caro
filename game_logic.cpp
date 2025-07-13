@@ -37,6 +37,8 @@ void Game::render() {
     int sideX = 4 * BOARD_SIZE + 10; // Side menu position
     menu.drawSideMenu(sideX, 2, playerX.getScore(), playerO.getScore(), playerX.getTime(), playerO.getTime());
     menu.drawInstructions(sideX, 12);
+    menu.drawMoveHistory(history, sideX, 20, moveHistoryScroll);
+
 
     // Current turn
     gotoXY(0, 2 * BOARD_SIZE + 2);
@@ -141,6 +143,21 @@ void Game::handleMove() {
         }
     }
 
+ 
+    if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {
+        history.push_back({ cursorRow, cursorCol, currentPlayer->getType() });
+
+        if (board.checkWin(cursorRow, cursorCol, currentPlayer->getType())) {
+            render();
+            displayWinner();
+            isRunning = false;
+        } else {
+            switchTurn();
+        }
+    }
+
+
+
 }
 
 void Game::switchTurn() {
@@ -168,14 +185,15 @@ void Game::displayWinner() {
     }
 }
 
-void Game::moveHistory(vector<string>& history) const {
+// void Game::moveHistory(vector<string>& history) const {
 
     
-    string move = format("{}. Player{} ({}, {})", history.size() + 1,
-                     currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O",
-                     row + 1, col + 1);
-    history.push_back(move);
-}
+//     string move = format("{}. Player{} ({}, {})", history.size() + 1,
+//                      currentPlayer->getType() == CellState::PLAYER_X ? "X" : "O",
+//                      row + 1, col + 1);
+//     history.push_back(move);
+// }
+
 
 void Game::resetGame() {
     board.reset();
