@@ -1,6 +1,9 @@
 #pragma once
 #include <iostream>
 #include "ultils.h"
+#include "player.h"
+#include <vector>
+
 
 // ╔═════════════════════════════════╗
 // ║          CARO GAME MENU         ║
@@ -14,8 +17,15 @@
 
 using namespace std;
 
+struct MoveRecord {
+    int row; // Row of the move
+    int col; // Column of the move
+    CellState player; // Player who made the move
+};
+
 class Menu {
 private:
+    vector<MoveRecord> moveHistory; // History of moves made in the game
 
     // Add any private members if needed
 public:

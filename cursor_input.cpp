@@ -43,6 +43,10 @@ InputKey getInputKey() {
                     case 'd': case 'D': return InputKey::RIGHT;
                     case '\n': return InputKey::ENTER;
                     case 27:   return InputKey::ESC; // Escape
+                    case 'q': case 'Q': return InputKey::Q; // Quit to menu
+                    case 'r': case 'R': return InputKey::R; // Restart game
+                    case '[': return InputKey::LEFT_BRACKET; // '[' key
+                    case ']': return InputKey::RIGHT_BRACKET; // ']' key
                     default:   return InputKey::NONE;
                 }
             }

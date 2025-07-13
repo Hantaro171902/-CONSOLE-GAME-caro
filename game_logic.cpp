@@ -79,6 +79,12 @@ void Game::handleMove() {
                 break;
             case InputKey::RIGHT: if (cursorCol < BOARD_SIZE - 1) cursorCol++; // Move cursor right
                 break;
+            case InputKey::LEFT_BRACKET: // '[' key
+                if (moveHistoryScroll > 0) moveHistoryScroll--; // Scroll up
+                break;
+            case InputKey::RIGHT_BRACKET: // ']' key
+                if (moveHistoryScroll + 1 < history.size() - 4) moveHistoryScroll++; // Scroll down
+                break;
             case InputKey::ENTER: {
                
                 if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {
@@ -108,6 +114,12 @@ void Game::handleMove() {
             case InputKey::LEFT: if (cursorCol > 0) cursorCol--; // Move cursor left
                 break;
             case InputKey::RIGHT: if (cursorCol < BOARD_SIZE - 1) cursorCol++; // Move cursor right
+                break;
+            case InputKey::LEFT_BRACKET: // '[' key
+                if (moveHistoryScroll > 0) moveHistoryScroll--; // Scroll up
+                break;
+            case InputKey::RIGHT_BRACKET: // ']' key
+                if (moveHistoryScroll + 1 < history.size() - 4) moveHistoryScroll++; // Scroll down
                 break;
             case InputKey::ENTER: {
                 if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {

@@ -10,12 +10,6 @@
 
 using namespace std;
 
-struct MoveRecord {
-    int row; // Row of the move
-    int col; // Column of the move
-    CellState player; // Player who made the move
-};
-
 class Game {
 private:
     chrono::steady_clock::time_point startTime; // Start time for the game
@@ -32,7 +26,9 @@ private:
     int cursorRow = 0; // Cursor position for input
     int cursorCol = 0; // Cursor position for input
 
-    vector<MoveRecord> moveHistory; // History of moves made in the game
+    int moveHistoryScroll = 0;
+
+    
 
 public:
     Game();
