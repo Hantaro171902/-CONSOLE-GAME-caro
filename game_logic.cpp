@@ -35,9 +35,9 @@ void Game::render() {
 
     // Side menu
     int sideX = 4 * BOARD_SIZE + 10; // Side menu position
-    menu.drawSideMenu(sideX, 2, playerX.getScore(), playerO.getScore(), playerX.getTime(), playerO.getTime());
+    menu.drawRecord(sideX, 2, playerX.getScore(), playerO.getScore(), playerX.getTime(), playerO.getTime());
     menu.drawInstructions(sideX, 12);
-    menu.drawMoveHistory(history, sideX, 20, moveHistoryScroll);
+    menu.drawMoveHistory(moveHistory, sideX, 20, moveHistoryScroll);
 
 
     // Current turn
@@ -85,7 +85,7 @@ void Game::handleMove() {
                 if (moveHistoryScroll > 0) moveHistoryScroll--; // Scroll up
                 break;
             case InputKey::RIGHT_BRACKET: // ']' key
-                if (moveHistoryScroll + 1 < history.size() - 4) moveHistoryScroll++; // Scroll down
+                if (moveHistoryScroll + 1 < moveHistory.size() - 4) moveHistoryScroll++; // Scroll down
                 break;
             case InputKey::ENTER: {
                
@@ -121,7 +121,7 @@ void Game::handleMove() {
                 if (moveHistoryScroll > 0) moveHistoryScroll--; // Scroll up
                 break;
             case InputKey::RIGHT_BRACKET: // ']' key
-                if (moveHistoryScroll + 1 < history.size() - 4) moveHistoryScroll++; // Scroll down
+                if (moveHistoryScroll + 1 < moveHistory.size() - 4) moveHistoryScroll++; // Scroll down
                 break;
             case InputKey::ENTER: {
                 if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {
@@ -145,7 +145,7 @@ void Game::handleMove() {
 
  
     if (board.placeMove(cursorRow, cursorCol, currentPlayer->getType())) {
-        history.push_back({ cursorRow, cursorCol, currentPlayer->getType() });
+        moveHistory.push_back({ cursorRow, cursorCol, currentPlayer->getType() });
 
         if (board.checkWin(cursorRow, cursorCol, currentPlayer->getType())) {
             render();
@@ -155,8 +155,6 @@ void Game::handleMove() {
             switchTurn();
         }
     }
-
-
 
 }
 

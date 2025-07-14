@@ -1,6 +1,12 @@
 #pragma once
 // #include <windows.h>
 // SetConsoleOutputCP(437); // Enables extended ASCII chars (╔═╗║ etc.)
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string formatTime(int totalSeconds);
 
 void gotoXY(int x, int y);
 void clearScreen();

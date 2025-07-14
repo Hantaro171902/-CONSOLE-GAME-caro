@@ -7,19 +7,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "move_record.h"
 
 using namespace std;
-
-struct MoveRecord {
-    int row; // Row of the move
-    int col; // Column of the move
-    CellState player; // Player who made the move
-};
-
+using namespace std::chrono;
 
 class Game {
 private:
-    chrono::steady_clock::time_point startTime; // Start time for the game
+    steady_clock::time_point startTime; // Start time for the game
     int timeX; // Time taken by Player X
     int timeO; // Time taken by Player O
     
@@ -51,7 +46,6 @@ public:
         return isRunning;
     };
 
-    void drawMoveHistory(int x, int y, const vector<MoveRecord>& history);
     void resetGame();
 
 };

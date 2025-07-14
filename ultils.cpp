@@ -1,8 +1,21 @@
 // ultils.cpp
 #include "ultils.h"
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
+
+
+string formatTime(int totalSeconds) {
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+
+    std::ostringstream oss;
+    oss << std::setw(2) << std::setfill('0') << minutes
+        << ":" << std::setw(2) << std::setfill('0') << seconds;
+    return oss.str();
+}
 
 // CONSOLE
 #ifdef _WIN32
@@ -43,6 +56,7 @@ bool kbhit() {
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+
 
 void gotoXY(int x, int y) {
     printf("\033[%d;%dH", y + 1, x + 1); // ANSI escape code for cursor
