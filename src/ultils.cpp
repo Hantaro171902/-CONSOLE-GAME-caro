@@ -11,9 +11,9 @@ string formatTime(int totalSeconds) {
     int minutes = totalSeconds / 60;
     int seconds = totalSeconds % 60;
 
-    std::ostringstream oss;
-    oss << std::setw(2) << std::setfill('0') << minutes
-        << ":" << std::setw(2) << std::setfill('0') << seconds;
+    ostringstream oss;
+    oss << setw(2) << setfill('0') << minutes
+        << ":" << setw(2) << setfill('0') << seconds;
     return oss.str();
 }
 
